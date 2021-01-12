@@ -21,8 +21,8 @@ X_train = X_train / 255.0;
 X_test = X_test / 255.0;
 
 # to_categorical function that converts a vector of integers into a matrix of binary vectors
-y_train = to_categorical(y_train);
-y_test = to_categorical(y_test);
+y_train = to_categorical(y_train,10);
+y_test = to_categorical(y_test,10);
 
 
 #create a simple model and complie the model
@@ -67,7 +67,7 @@ history = model.fit(
     X_train,
     y_train,
     batch_size=200,
-    epochs=10,
+    epochs=50,
     validation_data=(X_test,y_test)
 );
 
@@ -75,4 +75,7 @@ history = model.fit(
 score=model.evaluate(X_test,y_test,verbose=0);
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+#save the model
+model.save('mnist.h5')
 
